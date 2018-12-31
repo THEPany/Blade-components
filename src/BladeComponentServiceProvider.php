@@ -2,6 +2,7 @@
 
 namespace THEPany\BladeComponents;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use THEPany\BladeComponents\Blade\{Components, Directives, Includes};
 
@@ -14,13 +15,10 @@ class BladeComponentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'blade-components');
-
         $this->registerComponenets();
+        $this->registerPublishing();
 
-        if ($this->app->runningInConsole()) {
-            $this->publishAssets();
-        }
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'blade-components');
     }
 
     protected function registerComponenets()
@@ -30,15 +28,17 @@ class BladeComponentServiceProvider extends ServiceProvider
         Includes::make()->register();
     }
 
-    protected function publishAssets()
+    protected function registerPublishing()
     {
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/blade-components'),
-        ], 'blade-component-view');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../resources/views' => resource_path('views/vendor/blade-components'),
+            ], 'blade-component-view');
 
-        $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/blade-components'),
-        ], 'blade-component-asset');
+            $this->publishes([
+                __DIR__.'/../public' => public_path('vendor'),
+            ], 'blade-component-asset');
+        }
     }
 
     /**

@@ -10,21 +10,20 @@ abstract class BladeComponentRegister
     /**
      * @var string
      */
-    protected $pathName = __DIR__. '/../../resources/views/';
+    private $pathName = __DIR__. '/../../resources/views/';
 
     /**
      * @var \Illuminate\Support\Collection
      */
-    protected $componentViews;
+    private $componentViews;
 
     /**
      * BladeComponentRegister constructor.
      */
-    public function __construct()
+    protected function __construct()
     {
         $this->componentViews = collect([]);
     }
-
 
     abstract protected function getDirectoryName();
 
@@ -56,7 +55,16 @@ abstract class BladeComponentRegister
      */
     private function loadFiles()
     {
-        return File::files($this->pathName . $this->getDirectoryName());
+        return File::files($this->getFilePaths());
+    }
+
+    private function getFilePaths()
+    {
+        if (is_dir(resource_path('views/vendor/blade-components'))) {
+            return resource_path("views/vendor/blade-components/{$this->getDirectoryName()}");
+        }
+
+        return $this->pathName . $this->getDirectoryName();
     }
 
     /**

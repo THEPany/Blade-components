@@ -24,18 +24,32 @@ $ composer require thepany/blade-components
 
 > En Laravel 5.5, [Los proveedores de servicios y los alias se registran automáticamente.](https://laravel.com/docs/5.5/packages#package-discovery) 
 
+Una vez que finalize la instalacion via composer, haz los siguientes cambios:
+
 1) Publicar los assets necesarios para el correcto funcionamiento de algunas librerias, ejecute el siguiente comando:
 
     ```php
    	php artisan vendor:publish --tag="blade-component-asset"
     ```
+2) Registrar las siguientes directivas:
 
-2) Para publicar los componentes dentro del directorio de vistas de su aplicación, ejecute el siguiente comando:
+	```html
+	<head>
+		<!-- Scripts -->
+		@scripts()
+		
+		<!-- Links -->
+		@stack('links')
+	</head>
+	```
+	> La directiva `@scripts()` incluye por defecto `@stack('scripts')` por lo que no es necesario que se registre.
+
+3) Para publicar los componentes dentro del directorio de vistas de su aplicación, ejecute el siguiente comando:
 
 	```php
 	php artisan vendor:publish --tag="blade-component-view"
 	```
-
+	> Al publicar los componentes, puedes modificarlos a tu gusto, Incluso puedes registrar tus propios componentes dentro de las directorios generados. Pero debes tener en cuenta que si eliminas todos los componentes deberas eliminar el cache de las vistar para volver a utilizar los componentes por defecto
 
 ## Algunos Componentes
 

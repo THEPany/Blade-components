@@ -8,7 +8,7 @@
     </label>
 
     <div class="{{ $container_child_class ?? 'col-md-6' }}">
-        <select class="form-control" id="{{ $name ?? snake_case($label) }}" name="{{ $name ?? snake_case($label) }}">
+        <select class="form-control" id="{{ $name ?? snake_case($label) }}" name="{{ $name ?? snake_case($label) }}" multiple>
             {{ $slot }}
         </select>
 
@@ -19,9 +19,9 @@
         @endif
     </div>
 
-
+    @push('onload')
+        new Choices(document.getElementById('{{ $name ?? snake_case($label) }}'), {
+            removeItemButton: true
+        });
+    @endpush
 </div>
-
-@push('onload')
-    new Choices(document.getElementById('{{ $name ?? snake_case($label) }}'));
-@endpush
