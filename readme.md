@@ -91,4 +91,24 @@ Una vez que finalize la instalacion via composer, haz los siguientes cambios:
 	@slot('footer', 'footer')
 @endcard
 
+@select
+	@slot('label', 'Select Simple')
+	<option value="1">Opcion 1</option>
+	<option value="2">Opcion 2</option>
+	<option value="3">Opcion 3</option>
+	<option value="4">Opcion 4</option>
+@endselect
+
+@selectmultiple
+	@slot('label', 'Select multiple')
+	<option selected>Open this select menu</option>
+	<option value="1">One</option>
+	<option value="2">Two</option>
+	<option value="3">Three</option>
+@endselectmultiple
+
+@flatpickr([
+	'label' => 'Date Picker',
+	'dateFormat' => 'd-m-Y',
+])
 ```
