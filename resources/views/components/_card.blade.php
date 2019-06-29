@@ -1,6 +1,6 @@
-<div class="card {{ $card_style ?? '' }} shadow-sm">
+<div class="card {{ $card_style ?? 'shadow-sm' }} ">
    @isset($header)
-        <div class="card-header bg-white border-0 {{ $header_style ?? '' }}">{{ $header }}</div>
+        <div class="card-header border-0 {{ $header_style ?? 'bg-white' }}">{{ $header }}</div>
    @endisset
     <div class="card-body {{ $body_style ?? '' }}">
         {{ $slot }}

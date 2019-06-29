@@ -8,7 +8,7 @@
     </label>
 
     <div class="{{ $container_child_class ?? 'col-md-6' }}">
-        <select class="form-control" id="{{ $name ?? snake_case($label) }}" name="{{ $name ?? snake_case($label) }}">
+        <select class="form-control{{ $errors->has($name ?? snake_case($label)) ? ' is-invalid ' : '' }}" id="{{ $name ?? snake_case($label) }}" name="{{ $name ?? snake_case($label) }}">
             {{ $slot }}
         </select>
 
@@ -23,5 +23,5 @@
 </div>
 
 @push('onload')
-    new Choices(document.getElementById('{{ $name ?? snake_case($label) }}'));
+    new Choices(php);
 @endpush

@@ -14,7 +14,7 @@
                 @endisset
                 type="{{ $type ?? 'text' }}"
                 placeholder="@isset($placeholder) {{ __($placeholder) }} @else {{ __($label) }} @endisset"
-                class="form-control{{ $errors->has(snake_case($label)) ? ' is-invalid' : '' }} {{ $input_class ?? '' }}"
+                class="form-control{{ $errors->has($name ?? snake_case($label)) ? ' is-invalid ' : '' }} {{ $input_class ?? '' }}"
                 id="{{ $name ?? snake_case($label) }}"
                 name="{{ $name ?? snake_case($label) }}"
                 value="{{ old($name ?? snake_case($label), $value ?? '') }}"
